@@ -7,16 +7,14 @@ function getAIData(dataLimit) {
 
 const showDisplayAIData = (universAllData, dataLimit) => {
   const divContainer = document.getElementById("card_container");
-  divContainer.textContent = '';
-  const showAll = document.getElementById('show-all');
-    if(dataLimit && universAllData.length > 6) {
-        universAllData = universAllData.slice(0, 6);
-        showAll.classList.remove('d-none');
-    }
-    else{
-        showAll.classList.add('d-none');
-    }
-
+  divContainer.textContent = "";
+  const showAll = document.getElementById("show-all");
+  if (dataLimit && universAllData.length > 6) {
+    universAllData = universAllData.slice(0, 6);
+    showAll.classList.remove("d-none");
+  } else {
+    showAll.classList.add("d-none");
+  }
 
   universAllData.forEach((data) => {
     const { image, name, published_in, id } = data;
@@ -52,15 +50,14 @@ const showDisplayAIData = (universAllData, dataLimit) => {
 };
 
 // spnineer
-const toggleSpinner = isLoading => {
-  const loaderSection = document.getElementById('spinner');
-  if(isLoading){
-      loaderSection.classList.remove('d-none')
+const toggleSpinner = (isLoading) => {
+  const loaderSection = document.getElementById("spinner");
+  if (isLoading) {
+    loaderSection.classList.remove("d-none");
+  } else {
+    loaderSection.classList.add("d-none");
   }
-  else{
-      loaderSection.classList.add('d-none');
-  }
-}
+};
 // all data show
 
 // fetch single data
@@ -76,7 +73,7 @@ const fetchSingleData = (id) => {
 // show single data
 function showSingleData(info) {
   const modalBody = document.getElementById("modalBody");
-  console.log(info)
+  console.log(info);
   const Somequestion = info.input_output_examples;
   let question = "";
   if (Somequestion !== null) {
@@ -158,17 +155,16 @@ function showSingleData(info) {
   if (accouaricy == null) {
     accouricyy.classList.add("d-none");
   }
-};
-
-// ProcessData 
-const processData = (dataLimit) =>{
-  getAIData(dataLimit);
 }
 
-document.getElementById('showMore').addEventListener('click', function(){
+// ProcessData
+const processData = (dataLimit) => {
+  getAIData(dataLimit);
+};
+
+document.getElementById("showMore").addEventListener("click", function () {
   toggleSpinner(true);
   processData();
 });
 
 processData(6);
-
