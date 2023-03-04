@@ -20,18 +20,6 @@
     </header>
 
     <main class="container">
-      <!-- snipper -->
-      <div class="d-flex justify-content-center">
-        <div
-          onclick="showSpinner()"
-          id="spinner"
-          class="spinner-border text-danger d-none"
-          role="status"
-        >
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
-
       <!-- card -->
       <div
         id="card_container"
@@ -65,18 +53,22 @@
           </div>
         </div>
       </div>
-
+       <!-- Spinner -->
+       <div class="d-flex justify-content-center py-5 d-none">
+        <div
+          id="spinner"
+          class="spinner-border text-danger"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
       <!-- show more button -->
-      <div
-        id="showMore"
-        onclick="showAllTogether()"
-        class="my-4 text-center d-none"
-      >
-        <button type="button" class="btn btn-danger fs-5">Show More</button>
+      <div id="show-all" class="my-4 text-center">
+        <button  id="showMore" type="button" class="btn btn-danger fs-5">Show More</button>
       </div>
     </main>
    <footer></footer>
-
     <!-- Bootstrap JS Link -->
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
     <!-- Script  -->

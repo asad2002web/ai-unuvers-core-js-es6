@@ -1,40 +1,71 @@
-// All Data Load
-const loadData = () => {
-  fetch("https://openapi.programming-hero.com/api/ai/tools")
+function getAIData(dataLimit) {
+  const url = `https://openapi.programming-hero.com/api/ai/tools`;
+  fetch(url)
     .then((res) => res.json())
-    .then((data) => showData(data.data.tools));
-};
+    .then((fethData) => showDisplayAIData(fethData.data.tools, dataLimit));
+}
 
-// Display Show Data
-const showData = (aiTools) => {
-  // console.log(aiTools)
-  // console.log(data.data.tools[0].name)
-  aiTools = aiTools.slice(0, 6);
-//   console.log(aiTools);
-  const dataConatiner = document.getElementById("data-container");
-  dataConatiner.classList.add('row');
-  dataConatiner.classList.add('g-3');
-  dataConatiner.classList.add('mb-5');
-  // dataConatiner.innerHTML='';
+const showDisplayAIData = (universAllData, dataLimit) => {
+  const divContainer = document.getElementById("card_container");
+  divContainer.textContent = '';
+  const showAll = document.getElementById('show-all');
+    if(dataLimit && universAllData.length > 6) {
+        universAllData = universAllData.slice(0, 6);
+        showAll.classList.remove('d-none');
+    }
+    else{
+        showAll.classList.add('d-none');
+    }
 
-  // display Show
-  aiTools.forEach((aiTool) => {
-    // console.log(aiTool)
-    const div = document.createElement("div");
-    div.classList.add("col-md-4");
-    // div.classList.add("mb-5");
-    div.innerHTML = `
-    <div class="card">
-        <img src="${aiTool.image}" class="card-img-top img-fluid" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Features</h5>
-     
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    </div>
-    </div>
-        `;
-    dataConatiner.appendChild(div);
+
+  universAllData.forEach((data) => {
+    const { image, name, published_in, id } = data;
+
+    const myDiv = document.createElement("div");
+    myDiv.classList.add("col");
+    const features = data.features;
+    const featureList = features
+      .map((feature) => `<li>${feature}</li>`)
+      .join("");
+
+    myDiv.innerHTML = `
+       <div class="card h-100 Small shadow">
+       <img src="${image}" class="card-img-top" alt="...">
+       <div class="card-body">
+         <h5 class="card-title">Featurse</h5>
+         <ol>
+          ${featureList}
+        </ol>
+         <hr>
+         <h5 class="card-title">${name}</h5>
+         <div class="d-flex justify-content-between align-items-center">
+          <p><span><i class="fa-solid fa-calendar-days "></i></span> ${published_in}</p>
+          
+         <i onclick="fetchSingleData('${id}')" class="fa-solid fa-arrow-right text-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+         </div>
+       </div>  
+      </div>    
+      `;
+    divContainer.appendChild(myDiv);
+
   });
 };
 
-loadData();
+// more btn
+
+// spnineer
+
+// all data show
+
+
+// ProcessData 
+const processData = (dataLimit) =>{
+  getAIData(dataLimit);
+}
+
+document.getElementById('showMore').addEventListener('click', function(){
+  processData();
+});
+
+processData(6);
+
